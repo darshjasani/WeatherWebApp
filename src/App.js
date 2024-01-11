@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React, { useEffect } from 'react'
+import './App.css'
+import SearchIcon from '@mui/icons-material/Search';
+const App = ()=>{
+  useEffect(()=>{
+  })
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <div className='buttons'>
+        
+        <div className='search'>
+          <SearchIcon/>
+          <input type='text'></input>
+          <button>Search</button>
+        </div>
+
+        <div className='current'></div>
+      </div>
+
+      <div className='title'>Weather App</div>
+
+      <div className='container'>
+          <div className='card'>
+
+          </div>
+      </div>
+    </>
+  )
 }
 
-export default App;
+export default App
