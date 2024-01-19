@@ -7,15 +7,52 @@ body{
     background-color: rgb(96, 96, 246);
 }
 
+.buttons{
+    display: flex;
+    flex-direction: row-reverse;
+}
 .search{
-    border: 1px solid #000;
-    display: inline-block;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+.search > input{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    text-align: center;
+    margin-right: 25px;
+}
+::placeholder{
+    color: black;
 }
 
-.search > input,button{
-    background-color: transparent;
-    border: 0;
+.search > .MuiSvgIcon-root{
+    margin-top: 10px;
 }
+.current > button{
+    background-color: rgb(123, 188, 245);
+    padding: 11px;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-around ;
+}
+.div1{
+    text-align: center;
+    padding-top: 1px;
+}
+.div2{
+    text-align: center;
+    padding-top: 5px;
+}
+
 .title{
     font-size:30px;
     position: relative;
