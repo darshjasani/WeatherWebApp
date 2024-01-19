@@ -74,6 +74,10 @@ body{
     transform: translateY(15%);
 }
 
+.card > .weatherIcon{
+    padding-top: 20px;
+    text-align: center;
+}
 @media screen and (max-width:780px) {
     .card{
         width: 50vw;
