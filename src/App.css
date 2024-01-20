@@ -28,7 +28,11 @@ body{
 ::placeholder{
     color: black;
 }
-
+.search > button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
 .search > .MuiSvgIcon-root{
     margin-top: 10px;
 }

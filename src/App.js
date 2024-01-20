@@ -3,51 +3,55 @@ import './App.css'
 import SearchIcon from '@mui/icons-material/Search';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import axios from 'axios';
+import Loader from './Loader';
 const App = ()=>{
   const [city, setCity] = useState('');
-  const [current,setCurrent] = useState(0);
   const [position, setPosition] = useState({latitude : null, longitude : null});
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
   const YOUR_API_KEY = '138c891aa2de594e179138288248aa9b'
-  const fecthData = async() =>{
+
+  const fecthDataviaCity = async()=>{
+
     try{
-      let response = '';
-      console.log(current);
-      if(current == 1){
-        response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?appid=${YOUR_API_KEY}&q=${city}&units=metric`
-        );
-      }
-      else{
-        response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?appid=${YOUR_API_KEY}&lat=${position.latitude}&lon=${position.longitude}&units=metric`
-        )
-      }
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?appid=${YOUR_API_KEY}&q=${city}&units=metric`
+      );
+
       setData(response.data);
-      console.log(response.data);
     }catch(error){
-      console.error(error);
+      console.log(error);
+    }finally{
+      setLoading(false);
     }
   }
 
-  useEffect(()=>{
-    //getCurrentLocation();
-    fecthData();
-  },[]);
+  const fecthDataviaCoord = async() =>{
+    try{
+      const response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/weather?appid=${YOUR_API_KEY}&lat=${position.latitude}&lon=${position.longitude}&units=metric`
+        )
+      setData(response.data);
+    }catch(error){
+      console.error(error);
+    }finally{
+      setLoading(false);
+    }
+  }
 
-  const handleInputChange = (e) => {
-    setCurrent(1);
-    console.log(e);
+  const fecthData = (e)=>{
     setCity(e.target.value);
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fecthData();
-  }
+  useEffect(()=>{
+    getCurrentLocation();
+  },[])
 
-  const getCurrentLocation = async() =>{
-    
+  useEffect(()=>{
+    fecthDataviaCoord();
+  },[position])
+
+  const getCurrentLocation = () =>{
     if( "geolocation" in navigator){
       navigator.geolocation.getCurrentPosition((pos)=>{
         setPosition({
@@ -59,12 +63,13 @@ const App = ()=>{
     }else{
       console.log("Geolcation not available in your browser.");
     }
-    console.log(position);
-    setCurrent(0);
   }
   return (
     <>
-      <form onSubmit={handleSubmit}>
+
+      {loading ? (<Loader/>) : (
+      <>
+      <div>
         <div className='buttons'>
           
           <div className='current'>
@@ -75,12 +80,12 @@ const App = ()=>{
           </div>
 
           <div className='search'>
-            <input type='text' placeholder='Search Location' onChange={handleInputChange}></input>
-            <button type='submit'><SearchIcon/></button>
+            <input type='text' placeholder='Search Location'onChange={fecthData} ></input>
+            <button type='submit' onClick={fecthDataviaCity}><SearchIcon/></button>
           </div> 
 
         </div>
-      </form>
+      </div>
 
       <div className='title'>Weather App</div>
 
@@ -101,8 +106,10 @@ const App = ()=>{
           </div>
       </div>
       ) : (
-        <div> Loading Weather Application</div>
+        <Loader/>
       )}
+    </>
+    )} 
     </>
   )
 }
