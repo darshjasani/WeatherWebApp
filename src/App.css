@@ -6,7 +6,7 @@
 body{
     background-color: rgb(96, 96, 246);
 }
-
+/*
 .buttons{
     display: flex;
     flex-direction: row-reverse;
@@ -86,4 +86,106 @@ body{
     .card{
         width: 50vw;
     }
+} */
+
+
+.container{
+    border : 1px solid black;
+    width: 50vw;
+    height: 70vh;
+    margin-top:10%;  
+    margin-left: 25%; 
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+.left{
+    background-color: white;
+    border: 10px solid pink;
+    border-radius: 30px;
+    width: 20vw;
+    height: 65vh;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.left > img{
+    margin-top:30px;
+    width: 250px;
+    height: 250px;
+}
+
+.left > .temp{
+    display: flex;
+    margin-top:20px;
+    margin-left: 40px;
+}
+
+.temp > .number{
+    font-size: 100px;
+}
+
+.temp > .deg{
+    margin-left: 10px;
+    font-size: 40px;
+}
+
+.left > .desc{
+    margin-top: 30px;
+    margin-left: 40px;
+    color: grey;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.right{
+    background-color: azure;
+    border: 1px solid red;
+    width: 35vw;
+    height: 65vh;
+}
+
+.right > .part1{
+    display: flex;
+    margin-left: 30px;
+    margin-top:10px;
+}
+
+.part1 > .week{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.part1 > .date{
+    margin-top: 5px;
+    font-size: 25px;
+}
+
+.part2{
+    border :2px solid rgb(246, 90, 7);
+    border-radius: 15px;
+    width: 70%;
+    height: 5%;
+    margin-top: 5px;
+    margin-left: 25px;
+}
+
+.part2 > input{
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
+    outline: none;
+}
+
+::placeholder{
+    padding-left: 10px;
+}
+
+.part3{
+    border: 1px solid black;
+    margin-top: 10px;
+    height: 80%;
 }
