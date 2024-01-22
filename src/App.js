@@ -4,6 +4,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import axios from 'axios';
 import Loader from './Loader';
+import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
+import AirIcon from '@mui/icons-material/Air';
+import InvertColorsIcon from '@mui/icons-material/InvertColors';
+import GrainIcon from '@mui/icons-material/Grain';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import WbTwilightIcon from '@mui/icons-material/WbTwilight';
 const App = ()=>{
   const [city, setCity] = useState('');
   const [position, setPosition] = useState({latitude : null, longitude : null});
@@ -115,6 +121,7 @@ const App = ()=>{
 
   return (
     <>
+      <div className='name'>DJ Weather Forecast</div>
       <div className='container'>
         <div className='left'>
             <img src = "https://ssl.gstatic.com/onebox/weather/64/sunny.png" />
@@ -137,17 +144,82 @@ const App = ()=>{
             </div>
 
             <div className='part3'>
-              <div className='row1'>
-                <div className='col1'>
-                  <div>
-                      <div>a</div>
-                      <div>b</div>
-                  </div>
-                  <div>
-                      abc
-                  </div>
-                </div>
-              </div>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div className='leftPart3'>
+                        <div>
+                          <div className='desc3'>Feels like</div>
+                          <div className='temp3'>25 <span>&deg;C</span></div>
+                        </div>
+                        <div>
+                          <DeviceThermostatIcon style={{color:'orange'}}/>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className='leftPart3'>
+                          <div>
+                            <div className='desc3'>Wind</div>
+                            <div className='temp3'>25 <span>m/s</span></div>
+                          </div>
+                          <div>
+                            <AirIcon style={{color:'rgb(73, 141, 243)'}}/>
+                          </div>
+                        </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div className='leftPart3'>
+                        <div>
+                          <div className='desc3'>Humidity</div>
+                          <div className='temp3'>25 <span>%</span></div>
+                        </div>
+                        <div>
+                          <InvertColorsIcon style={{color:'rgb(56, 131, 243)'}}/>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className='leftPart3'>
+                        <div>
+                          <div className='desc3'>Rain</div>
+                          <div className='temp3'>25 <span>mm</span></div>
+                        </div>
+                        <div>
+                          <GrainIcon style={{color:'rgb(56, 131, 243)'}}/>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div className='leftPart3'>
+                        <div>
+                          <div className='desc3'>Sunrise</div>
+                          <div className='temp3'>25 <span>AM</span></div>
+                        </div>
+                        <div>
+                          <LightModeIcon style={{color:'rgb(243, 155, 48)'}}/>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className='leftPart3'>
+                        <div>
+                          <div className='desc3'>Sunset</div>
+                          <div className='temp3'>25 <span>PM</span></div>
+                        </div>
+                        <div>
+                          <WbTwilightIcon style={{color:'rgb(243, 155, 48)'}}/>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
         </div>
       </div>
