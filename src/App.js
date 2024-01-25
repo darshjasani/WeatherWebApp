@@ -7,24 +7,23 @@ import Loader from './Loader';
 import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
 import AirIcon from '@mui/icons-material/Air';
 import InvertColorsIcon from '@mui/icons-material/InvertColors';
-import GrainIcon from '@mui/icons-material/Grain';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import WbTwilightIcon from '@mui/icons-material/WbTwilight';
+import FilterDramaIcon from '@mui/icons-material/FilterDrama';
 const App = ()=>{
-  const [city, setCity] = useState('');
-  const [position, setPosition] = useState({latitude : null, longitude : null});
+  const [city, setCity] = useState('Vadodara');
+  const [position, setPosition] = useState({latitude : 22.3, longitude : 73.2});
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
   const YOUR_API_KEY = '138c891aa2de594e179138288248aa9b'
 
   const fecthDataviaCity = async()=>{
-
     try{
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?appid=${YOUR_API_KEY}&q=${city}&units=metric`
       );
-
       setData(response.data);
+      console.log(response.data);
     }catch(error){
       console.log(error);
     }finally{
@@ -46,15 +45,19 @@ const App = ()=>{
   }
 
   const fecthData = (e)=>{
-    setCity(e.target.value);
+    if(e.code == "Enter"){
+      setCity(e.target.value);
+      fecthDataviaCity();
+    }
   }
 
   useEffect(()=>{
     getCurrentLocation();
-  },[])
-
-  useEffect(()=>{
     fecthDataviaCoord();
+  },[])
+  useEffect(()=>{
+    //fecthDataviaCity();
+    //fecthDataviaCoord();
   },[position])
 
   const getCurrentLocation = () =>{
@@ -121,26 +124,28 @@ const App = ()=>{
 
   return (
     <>
-      <div className='name'>DJ Weather Forecast</div>
+      {data == null ? <Loader/> : (
+        <>
+      <div className='name'>{data.name} Weather Forecast</div>
       <div className='container'>
         <div className='left'>
             <img src = "https://ssl.gstatic.com/onebox/weather/64/sunny.png" />
             <div className='temp'>
-              <div className='number'>25</div>
+              <div className='number'>{data.main.temp}</div>
               <div className='deg'>&deg;C</div>
             </div>
-            <div className='desc'>light rain</div>
+            <div className='desc'>{data.weather[0].main}</div>
         </div>
 
         <div className='right'>
 
             <div className='part1'>
-              <div className='week'>Sunday,</div>
-              <div className='date'>&nbsp;21 January</div>
+              <div className='week'>{new Date().toLocaleDateString('en-US',{weekday:'long'})},</div>
+              <div className='date'>&nbsp;{new Date().toLocaleDateString('en-US',{day:'numeric', month:'long'})}</div>
             </div>
 
             <div className='part2'>
-              <input type='text' placeholder='Enter City Name'/>
+              <input type='text' placeholder='Enter City Name' onKeyDown={fecthData}/>
             </div>
 
             <div className='part3'>
@@ -151,7 +156,7 @@ const App = ()=>{
                       <div className='leftPart3'>
                         <div>
                           <div className='desc3'>Feels like</div>
-                          <div className='temp3'>25 <span>&deg;C</span></div>
+                          <div className='temp3'>{data.main.feels_like} <span>&deg;C</span></div>
                         </div>
                         <div>
                           <DeviceThermostatIcon style={{color:'orange'}}/>
@@ -162,7 +167,7 @@ const App = ()=>{
                       <div className='leftPart3'>
                           <div>
                             <div className='desc3'>Wind</div>
-                            <div className='temp3'>25 <span>m/s</span></div>
+                            <div className='temp3'>{data.wind.speed} <span>m/s</span></div>
                           </div>
                           <div>
                             <AirIcon style={{color:'rgb(73, 141, 243)'}}/>
@@ -175,7 +180,7 @@ const App = ()=>{
                       <div className='leftPart3'>
                         <div>
                           <div className='desc3'>Humidity</div>
-                          <div className='temp3'>25 <span>%</span></div>
+                          <div className='temp3'>{data.main.humidity}<span>%</span></div>
                         </div>
                         <div>
                           <InvertColorsIcon style={{color:'rgb(56, 131, 243)'}}/>
@@ -185,11 +190,11 @@ const App = ()=>{
                     <td>
                       <div className='leftPart3'>
                         <div>
-                          <div className='desc3'>Rain</div>
-                          <div className='temp3'>25 <span>mm</span></div>
+                          <div className='desc3'>Clouds</div>
+                          <div className='temp3'>{data.clouds.all}<span>%</span></div>
                         </div>
                         <div>
-                          <GrainIcon style={{color:'rgb(56, 131, 243)'}}/>
+                          <FilterDramaIcon style={{color:'rgb(56, 131, 243)'}}/>
                         </div>
                       </div>
                     </td>
@@ -199,7 +204,7 @@ const App = ()=>{
                       <div className='leftPart3'>
                         <div>
                           <div className='desc3'>Sunrise</div>
-                          <div className='temp3'>25 <span>AM</span></div>
+                          <div className='temp3'>{new Date(data.sys.sunrise * 1000).toLocaleTimeString().slice(0,4)} <span>AM</span></div>
                         </div>
                         <div>
                           <LightModeIcon style={{color:'rgb(243, 155, 48)'}}/>
@@ -210,7 +215,7 @@ const App = ()=>{
                       <div className='leftPart3'>
                         <div>
                           <div className='desc3'>Sunset</div>
-                          <div className='temp3'>25 <span>PM</span></div>
+                          <div className='temp3'>{new Date(data.sys.sunset * 1000).toLocaleTimeString().slice(0,4)} <span>PM</span></div>
                         </div>
                         <div>
                           <WbTwilightIcon style={{color:'rgb(243, 155, 48)'}}/>
@@ -223,6 +228,8 @@ const App = ()=>{
             </div>
         </div>
       </div>
+    </>
+      )}
     </>
   )
 }
