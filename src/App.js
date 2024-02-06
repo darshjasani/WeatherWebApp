@@ -29,6 +29,7 @@ const App = ()=>{
       setLoader(false);
     }catch(error){
       alert('Please enter correct city!!');
+      setLoader(false);
     }
   }
 
@@ -43,6 +44,7 @@ const App = ()=>{
       setLoader(false);
     }catch(error){
       console.error(error);
+      setLoader(false);
     }
   }
 
@@ -168,7 +170,7 @@ const App = ()=>{
                       <div className='leftPart3'>
                         <div>
                           <div className='desc3'>Humidity</div>
-                          <div className='temp3'>{data.main.humidity}<span>%</span></div>
+                          <div className='temp3'>{data.main.humidity}&nbsp;<span>%</span></div>
                         </div>
                         <div>
                           <InvertColorsIcon style={{color:'rgb(56, 131, 243)'}}/>
@@ -179,10 +181,10 @@ const App = ()=>{
                       <div className='leftPart3'>
                         <div>
                           <div className='desc3'>Clouds</div>
-                          <div className='temp3'>{data.clouds.all}<span>%</span></div>
+                          <div className='temp3'>{data.clouds.all}&nbsp;<span>%</span></div>
                         </div>
                         <div>
-                          <FilterDramaIcon style={{color:'rgb(56, 131, 243)'}}/>
+                          <FilterDramaIcon style={{color:'rgb(56, 131, 243)', paddingRight:'3px'}}/>
                         </div>
                       </div>
                     </td>

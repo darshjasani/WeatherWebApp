@@ -147,6 +147,11 @@ td{
 }
 .leftPart3{
     display: flex;
+    justify-content: space-between;
+}
+.leftPart3 > div{
+    margin: 0;
+    border: 0px solid black;
 }
 .desc3{
     font-size: 25px;
@@ -164,7 +169,7 @@ td{
     margin-left: 70px;
     padding-top: 20px;
 }
-.leftPart3 > div > div> span{
+.leftPart3 > div > div > span{
     font-size: 20px;
-    padding-left: 0px;
+    margin-bottom: 10px;
 }
