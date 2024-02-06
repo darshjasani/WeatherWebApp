@@ -60,6 +60,30 @@ const App = ()=>{
     //fecthDataviaCoord();
   },[position])
 
+  const getImgLink = ()=>{
+    let str = data.weather[0].main;
+    switch(str){
+      case 'Clear':
+        return 'https://cdn-icons-png.flaticon.com/128/4814/4814268.png';
+      case 'Clouds':
+        return 'https://cdn-icons-png.flaticon.com/128/414/414927.png';
+      case 'Rain':
+        return 'https://cdn-icons-png.flaticon.com/128/4088/4088981.png';
+      case 'Drizzle':
+        return 'https://cdn-icons-png.flaticon.com/128/9231/9231646.png';
+      case 'Thunderstorm':
+        return 'https://cdn-icons-png.flaticon.com/128/2864/2864448.png';
+      case 'Snow':
+        return 'https://cdn-icons-png.flaticon.com/128/2315/2315309.png';
+      case 'Mist':
+        return 'https://cdn-icons-png.flaticon.com/128/4005/4005817.png';
+      case 'Fog':
+        return 'https://cdn-icons-png.flaticon.com/128/7774/7774309.png';
+      default:
+        return 'https://cdn-icons-png.flaticon.com/128/4814/4814489.png';
+
+    }
+  }
   const getCurrentLocation = () =>{
     if( "geolocation" in navigator){
       navigator.geolocation.getCurrentPosition((pos)=>{
@@ -129,7 +153,7 @@ const App = ()=>{
       <div className='name'>{data.name} Weather Forecast</div>
       <div className='container'>
         <div className='left'>
-            <img src = "https://ssl.gstatic.com/onebox/weather/64/sunny.png" />
+            <img src = {getImgLink()} />
             <div className='temp'>
               <div className='number'>{data.main.temp}</div>
               <div className='deg'>&deg;C</div>
