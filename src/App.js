@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
-import SearchIcon from '@mui/icons-material/Search';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import axios from 'axios';
 import Loader from './Loader';
@@ -11,10 +10,10 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import WbTwilightIcon from '@mui/icons-material/WbTwilight';
 import FilterDramaIcon from '@mui/icons-material/FilterDrama';
 const App = ()=>{
-  const [city, setCity] = useState('Vadodara');
-  const [position, setPosition] = useState({latitude : 22.3, longitude : 73.2});
-  const [loading, setLoading] = useState(true);
+  const [city, setCity] = useState('Long Beach');
+  const [position, setPosition] = useState({latitude : null, longitude : null});
   const [data, setData] = useState(null);
+  const [loader, setLoader] = useState(true);
   const YOUR_API_KEY = '138c891aa2de594e179138288248aa9b'
 
   const fecthDataviaCity = async()=>{
@@ -23,42 +22,49 @@ const App = ()=>{
         `https://api.openweathermap.org/data/2.5/weather?appid=${YOUR_API_KEY}&q=${city}&units=metric`
       );
       setData(response.data);
-      console.log(response.data);
+      setPosition({
+        latitude : response.data.coord.lat,
+        longitude: response.data.coord.lon
+      });
+      setLoader(false);
     }catch(error){
-      console.log(error);
-    }finally{
-      setLoading(false);
+      alert('Please enter correct city!!');
     }
   }
 
   const fecthDataviaCoord = async() =>{
+    
     try{
       const response = await axios.get(
           `https://api.openweathermap.org/data/2.5/weather?appid=${YOUR_API_KEY}&lat=${position.latitude}&lon=${position.longitude}&units=metric`
         )
       setData(response.data);
+      setCity(response.data.name);
+      setLoader(false);
     }catch(error){
       console.error(error);
-    }finally{
-      setLoading(false);
     }
   }
 
   const fecthData = (e)=>{
     if(e.code == "Enter"){
       setCity(e.target.value);
-      fecthDataviaCity();
     }
   }
 
   useEffect(()=>{
-    getCurrentLocation();
-    fecthDataviaCoord();
-  },[])
+    fecthDataviaCity();
+  },[]);
+
   useEffect(()=>{
-    //fecthDataviaCity();
-    //fecthDataviaCoord();
-  },[position])
+    setLoader(true);
+    fecthDataviaCity();
+  },[city]);
+
+  useEffect(()=>{
+    setLoader(true);
+    fecthDataviaCoord();
+  },[position]);
 
   const getImgLink = ()=>{
     let str = data.weather[0].main;
@@ -85,70 +91,27 @@ const App = ()=>{
     }
   }
   const getCurrentLocation = () =>{
+    setLoader(true);
     if( "geolocation" in navigator){
       navigator.geolocation.getCurrentPosition((pos)=>{
         setPosition({
           latitude : pos.coords.latitude,
           longitude : pos.coords.longitude
         });
+        setLoader(false);
+      }, (error)=>{
+        if (error.code === error.PERMISSION_DENIED) {
+          alert('Please allow access to your location.');
+        }
       });
 
     }else{
       console.log("Geolcation not available in your browser.");
     }
   }
-  // return (
-  //   <>
-
-  //     {data == null ? (<Loader/>) : (
-  //       <>
-  //       <div>
-  //         <div className='buttons'>
-            
-  //           <div className='current'>
-  //               <button onClick={getCurrentLocation}>
-  //                 <div className='div1'> <MyLocationIcon/></div>
-  //                 <div className='div2'> Current Location</div>
-  //               </button>
-  //           </div>
-
-  //           <div className='search'>
-  //             <input type='text' placeholder='Search Location'onChange={fecthData} ></input>
-  //             <button type='submit' onClick={fecthDataviaCity}><SearchIcon/></button>
-  //           </div> 
-
-  //         </div>
-  //       </div>
-
-  //       <div className='title'>Weather App</div>
-
-  //       {data ? (
-  //         <div className='container'>
-  //           <div className='card'>
-  //               <div className='weatherIcon'>
-  //                       <img src="https://ssl.gstatic.com/onebox/weather/64/sunny.png" />
-  //               </div>
-
-  //               <div className='temp'>
-  //                 {data ? (<div>{data.name} {data.main.temp}</div>) : ('16C') }
-  //               </div>
-
-  //               <div className='loc'>
-  //                 Long Beach
-  //               </div>
-  //           </div>
-  //       </div>
-  //       ) : (
-  //         <Loader/>
-  //       )}
-  //     </>
-  //     )} 
-  //     </>
-  // )
-
   return (
     <>
-      {data == null ? <Loader/> : (
+      {loader ? <Loader/> : (
         <>
       <div className='name'>{data.name} Weather Forecast</div>
       <div className='container'>
@@ -169,7 +132,8 @@ const App = ()=>{
             </div>
 
             <div className='part2'>
-              <input type='text' placeholder='Enter City Name' onKeyDown={fecthData}/>
+              <input type='text' placeholder='Enter City Name'  onKeyDown={fecthData}/>
+              <button onClick={getCurrentLocation}> Current Location</button>
             </div>
 
             <div className='part3'>

@@ -4,7 +4,7 @@ function Loader() {
   return (
     <>
       <div class="loading">
-        <h2>LOADING ...</h2>
+        <h2>Fecthing ...</h2>
         <span></span>
         <span></span>
         <span></span>

@@ -2,7 +2,7 @@
  * Baseline styles
  */
 h2 {
-  color: #ccc;
+  color: #0c0c0c;
   margin: 0;
   font: .8em verdana;
   text-transform: uppercase;
@@ -25,7 +25,7 @@ h2 {
   width: .6em;
   height: .6em;
   margin: .19em;
-  background: #007DB6;
+  background: #7704f3;
   border-radius: .6em;
   animation: loading 1s infinite alternate;
 }
@@ -35,27 +35,21 @@ h2 {
  * Smarter targeting vs nth-of-type?
  */
 .loading span:nth-of-type(2) {
-  background: #008FB2;
   animation-delay: 0.2s;
 }
 .loading span:nth-of-type(3) {
-  background: #009B9E;
   animation-delay: 0.4s;
 }
 .loading span:nth-of-type(4) {
-  background: #00A77D;
   animation-delay: 0.6s;
 }
 .loading span:nth-of-type(5) {
-  background: #00B247;
   animation-delay: 0.8s;
 }
 .loading span:nth-of-type(6) {
-  background: #5AB027;
   animation-delay: 1.0s;
 }
 .loading span:nth-of-type(7) {
-  background: #A0B61E;
   animation-delay: 1.2s;
 }
 
