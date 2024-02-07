@@ -9,6 +9,8 @@ import InvertColorsIcon from '@mui/icons-material/InvertColors';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import WbTwilightIcon from '@mui/icons-material/WbTwilight';
 import FilterDramaIcon from '@mui/icons-material/FilterDrama';
+
+
 const App = ()=>{
   const [city, setCity] = useState('Long Beach');
   const [position, setPosition] = useState({latitude : null, longitude : null});
@@ -194,7 +196,7 @@ const App = ()=>{
                       <div className='leftPart3'>
                         <div>
                           <div className='desc3'>Sunrise</div>
-                          <div className='temp3'>{new Date(data.sys.sunrise * 1000).toLocaleTimeString().slice(0,4)} <span>AM</span></div>
+                          <div className='temp3'>{new Date(((data.sys.sunrise + (new Date().getTimezoneOffset() * 60) + data.timezone)) * 1000).toLocaleTimeString().slice(0,4)} <span>AM</span></div>
                         </div>
                         <div>
                           <LightModeIcon style={{color:'rgb(243, 155, 48)'}}/>
@@ -205,7 +207,7 @@ const App = ()=>{
                       <div className='leftPart3'>
                         <div>
                           <div className='desc3'>Sunset</div>
-                          <div className='temp3'>{new Date(data.sys.sunset * 1000).toLocaleTimeString().slice(0,4)} <span>PM</span></div>
+                          <div className='temp3'>{new Date(((data.sys.sunset + (new Date().getTimezoneOffset() * 60) + data.timezone)) * 1000).toLocaleTimeString().slice(0,4)} <span>PM</span></div>
                         </div>
                         <div>
                           <WbTwilightIcon style={{color:'rgb(243, 155, 48)'}}/>
