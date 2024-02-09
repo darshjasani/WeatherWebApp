@@ -173,3 +173,124 @@ td{
     font-size: 20px;
     margin-bottom: 10px;
 }
+
+.mobile{
+    display: none;
+}
+
+@media screen and (max-width:768px) {
+    .mobile{
+        display: block;
+    }
+    .name{
+        font-size: 20px;
+    }
+    .inputM{
+        margin: 10px;
+        background-color: white;
+        border: 3px solid rgb(215, 212, 212);
+        border-radius: 15px;
+    }
+    .dayInfo{
+        margin:10px;
+        display: flex;
+        font-size: 30px;
+    }
+    .inputM > .input{
+        display: flex;
+        justify-content: space-between;
+        padding-left: 15px;
+        padding-right: 5px;
+        border: 2px solid orange;
+        border-radius: 15px;
+        margin: 5px;
+    }
+
+    .input > input{
+        outline: none;
+        border: 0;
+    }
+
+    .input > button{
+        border : 0;
+        background-color: transparent;
+        padding-top: 2px;
+        cursor: pointer;
+        color: brown;
+    }
+
+
+    .tempInfo{
+        display: flex;
+        margin: 10px;
+        background-color: white;
+        border: 3px solid rgb(215, 212, 212);
+        border-radius: 15px;
+    }
+
+    .tempInfo >  img{
+        padding-left: 5px;
+    }
+
+    .tempInfo > div > .temp{
+        font-size: 40px;
+        padding-top: 25px;
+        padding-left: 5px;
+    }
+
+    .tempInfo > div > .desc{
+        padding-top: 5px;
+        padding-left: 15px;
+    }
+
+    .detailM{
+        margin: 5px;
+        margin: 10px;
+        background-color: rgb(215, 212, 212);
+        border: 4px solid rgb(215, 212, 212);
+        border-radius: 20px;
+    }
+
+    .detailM > .one, .two, .three, .four, .five, .six{
+        display: flex;
+        justify-content: space-between;
+        border: 4px solid rgb(215,212,212);
+        border-radius: 15px;
+        background-color: white;
+    }
+
+    .one > div > .MuiSvgIcon-root{
+        font-size: 40px;
+        margin-left: 70px;
+        padding-top: 20px;
+    }
+
+    .two > div > .MuiSvgIcon-root{
+        font-size: 40px;
+        margin-left: 70px;
+        padding-top: 20px;
+    }
+    .three > div > .MuiSvgIcon-root{
+        font-size: 40px;
+        margin-left: 70px;
+        padding-top: 20px;
+    }
+    .four > div > .MuiSvgIcon-root{
+        font-size: 40px;
+        margin-left: 70px;
+        padding-top: 20px;
+    }
+    .five > div > .MuiSvgIcon-root{
+        font-size: 40px;
+        margin-left: 70px;
+        padding-top: 20px;
+    }
+    .six > div > .MuiSvgIcon-root{
+        font-size: 40px;
+        margin-left: 70px;
+        padding-top: 20px;
+    }
+    .container{
+        display :none;
+    }
+}

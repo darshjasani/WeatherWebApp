@@ -9,7 +9,7 @@ import InvertColorsIcon from '@mui/icons-material/InvertColors';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import WbTwilightIcon from '@mui/icons-material/WbTwilight';
 import FilterDramaIcon from '@mui/icons-material/FilterDrama';
-
+import SearchIcon from '@mui/icons-material/Search';
 
 const App = ()=>{
   const [city, setCity] = useState('Long Beach');
@@ -219,6 +219,88 @@ const App = ()=>{
               </table>
             </div>
         </div>
+      </div>
+
+      <div className='mobile'>
+        <div className='inputM'>
+          <div className='dayInfo'>
+            <div>{new Date().toLocaleDateString('en-US',{weekday:'long'})},</div>
+            <div>&nbsp;{new Date().toLocaleDateString('en-US',{day:'numeric', month:'long'})}</div>
+          </div>
+
+          <div className='input'>
+            <input type='text' placeholder='Enter City Name' onKeyDown={fecthData}></input>
+            <button onClick={fecthData}><SearchIcon/></button>
+          </div>
+          
+        </div>
+
+        <div className='tempInfo'>
+            <img src = {getImgLink()} />
+            <div>
+              <div className='temp'>{data.main.temp} <span>&deg;C</span></div>
+              <div className='desc'>{data.weather[0].main}</div>
+            </div>
+          <div>
+          </div>
+        </div>
+
+        <div className='detailM'>
+          <div className='one'>
+              <div>
+                <div className='desc3'>Feels like</div>
+                <div className='temp3'>{data.main.feels_like} <span>&deg;C</span></div>
+              </div>
+              <div>
+                <DeviceThermostatIcon style={{color:'orange'}}/>
+              </div>
+          </div>
+          <div className='two'>
+              <div>
+                <div className='desc3'>Wind</div>
+                <div className='temp3'>{data.wind.speed} <span>m/s</span></div>
+              </div>
+              <div>
+                <AirIcon style={{color:'rgb(73, 141, 243)'}}/>
+              </div>
+          </div>
+          <div className='three'>
+            <div>
+              <div className='desc3'>Humidity</div>
+              <div className='temp3'>{data.main.humidity}&nbsp;<span>%</span></div>
+            </div>
+            <div>
+              <InvertColorsIcon style={{color:'rgb(56, 131, 243)'}}/>
+            </div>
+          </div>
+          <div className='four'>
+            <div>
+              <div className='desc3'>Clouds</div>
+              <div className='temp3'>{data.clouds.all}&nbsp;<span>%</span></div>
+            </div>
+            <div>
+              <FilterDramaIcon style={{color:'rgb(56, 131, 243)', paddingRight:'3px'}}/>
+            </div>
+          </div>
+          <div className='five'>
+            <div>
+              <div className='desc3'>Sunrise</div>
+              <div className='temp3'>{new Date(((data.sys.sunrise + (new Date().getTimezoneOffset() * 60) + data.timezone)) * 1000).toLocaleTimeString().slice(0,4)} <span>AM</span></div>
+            </div>
+            <div>
+              <LightModeIcon style={{color:'rgb(243, 155, 48)'}}/>
+            </div>
+          </div>
+          <div className='six'>
+              <div>
+                <div className='desc3'>Sunset</div>
+                <div className='temp3'>{new Date(((data.sys.sunset + (new Date().getTimezoneOffset() * 60) + data.timezone)) * 1000).toLocaleTimeString().slice(0,4)} <span>PM</span></div>
+              </div>
+              <div>
+                <WbTwilightIcon style={{color:'rgb(243, 155, 48)'}}/>
+              </div>
+          </div>
+          </div>
       </div>
     </>
       )}
