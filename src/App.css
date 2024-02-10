@@ -209,6 +209,7 @@ td{
     .input > input{
         outline: none;
         border: 0;
+        height: 25px;
     }
 
     .input > button{

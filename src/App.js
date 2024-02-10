@@ -51,6 +51,8 @@ const App = ()=>{
   }
 
   const fecthData = (e)=>{
+    console.log(document.getElementById('cityName').value);
+
     if(e.code == "Enter"){
       setCity(e.target.value);
     }
@@ -229,8 +231,8 @@ const App = ()=>{
           </div>
 
           <div className='input'>
-            <input type='text' placeholder='Enter City Name' onKeyDown={fecthData}></input>
-            <button onClick={fecthData}><SearchIcon/></button>
+            <input id = 'cityName' type='text' placeholder='Enter City Name' onKeyDown={fecthData}/>
+            <button onClick={()=>{setCity(document.getElementById('cityName').value)}}><SearchIcon/></button>
           </div>
           
         </div>
